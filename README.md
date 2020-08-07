@@ -1,4 +1,4 @@
-# hearts-migrate
+# db-migrate
 
 mysql migrate
 
@@ -10,7 +10,7 @@ mysql migrate
 
 ## Running
 
-### Golang專案引用hearts-migrate
+### Golang專案引用db-migrate
 
 1. 定義 env 變數, 其中 `Environment.Dir` 為 sql folder
 2. 建立 sql folder, 將 sql files 放置該目錄底下, 檔名格式為 `yyyyMMddHHmmss-簡述.sql`
@@ -18,7 +18,7 @@ mysql migrate
 ```golane
 
 import (
-	command "github.com/heartz2o2o/hearts-migrate/command"
+	command "github.com/heartz2o2o/db-migrate/command"
 )
 
 func main() {
@@ -38,7 +38,7 @@ func main() {
 #### Build binary file
 
 ```bash
-$ go build -o hearts-migrate ./main
+$ go build -o db-migrate ./main
 ```
 
 #### 配置dbconfig.yml
@@ -54,7 +54,7 @@ development:
 #### Run
 
 ```bash
-$ ./hearts-migrate status
+$ ./db-migrate status
 +---------------+---------+
 |   MIGRATION   | APPLIED |
 +---------------+---------+
@@ -62,10 +62,10 @@ $ ./hearts-migrate status
 | 2-record.sql  | no      |
 +---------------+---------+
 
-$ ./hearts-migrate up
+$ ./db-migrate up
 Applied 2 migrations
 
-$ ./hearts-migrate status
+$ ./db-migrate status
 +---------------+-------------------------------+
 |   MIGRATION   |            APPLIED            |
 +---------------+-------------------------------+
@@ -73,10 +73,10 @@ $ ./hearts-migrate status
 | 2-record.sql  | 2020-08-07 12:44:20 +0000 UTC |
 +---------------+-------------------------------+
 
-$ ./hearts-migrate down
+$ ./db-migrate down
 Applied 1 migration
 
-$ ./hearts-migrate status
+$ ./db-migrate status
 +---------------+-------------------------------+
 |   MIGRATION   |            APPLIED            |
 +---------------+-------------------------------+

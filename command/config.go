@@ -9,7 +9,7 @@ import (
 	"os"
 
 	_ "github.com/go-sql-driver/mysql"
-	migrate "github.com/heartz2o2o/hearts-migrate/migrate"
+	migrate "github.com/heartz2o2o/db-migrate/migrate"
 	"gopkg.in/gorp.v1"
 	"gopkg.in/yaml.v2"
 )

@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	command "github.com/heartz2o2o/hearts-migrate/command"
+	command "github.com/heartz2o2o/db-migrate/command"
 	"os"
 
 	"github.com/mitchellh/cli"

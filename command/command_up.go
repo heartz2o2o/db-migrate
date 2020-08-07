@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	migrate "github.com/heartz2o2o/hearts-migrate/migrate"
+	migrate "github.com/heartz2o2o/db-migrate/migrate"
 )
 
 type UpCommand struct {

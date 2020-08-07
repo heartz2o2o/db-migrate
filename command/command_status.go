@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	migrate "github.com/heartz2o2o/hearts-migrate/migrate"
+	migrate "github.com/heartz2o2o/db-migrate/migrate"
 	"github.com/olekukonko/tablewriter"
 )
 

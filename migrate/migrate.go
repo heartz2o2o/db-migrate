@@ -15,7 +15,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/heartz2o2o/hearts-migrate/sqlparse"
+	"github.com/heartz2o2o/db-migrate/sqlparse"
 
 	"gopkg.in/gorp.v1"
 )

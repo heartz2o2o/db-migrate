@@ -3,7 +3,7 @@
 package command
 
 import (
-	migrate "github.com/heartz2o2o/hearts-migrate/migrate"
+	migrate "github.com/heartz2o2o/db-migrate/migrate"
 	_ "github.com/mattn/go-oci8"
 )
 
