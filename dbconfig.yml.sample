@@ -1,0 +1,4 @@
+development:
+    dialect: mysql
+    datasource: root:123456@tcp(localhost:3306)/bac?parseTime=true
+    dir: sql
