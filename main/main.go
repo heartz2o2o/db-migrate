@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	command "github.com/heartz2o2o/db-migrate/command"
 	"os"
 
+	command "github.com/heartz2o2o/db-migrate/command"
+	migrate "github.com/heartz2o2o/db-migrate/migrate"
 	"github.com/mitchellh/cli"
 )
 
@@ -13,17 +14,19 @@ var ui cli.Ui
 func main() {
 	// env := &command.Environment{
 	// 	Dialect:    "mysql",
-	// 	DataSource: "root:123456@tcp(localhost:3306)/bac?parseTime=true",
-	// 	Dir:        "./sql"}
+	// 	DataSource: "root:123456@tcp(localhost:3306)/member?parseTime=true",
+	// 	Dir:        "../sql"}
 	// command.SetEnvironment(env)
-	// migrate := command.UpCommand{}
-	// migrate.Run([]string{})
+	// migrate.SetIgnoreUnknown(true)
+	// Upcommand := command.UpCommand{}
+	// Upcommand.Run([]string{})
 
 	realMain()
 	os.Exit(0)
 }
 
 func realMain() int {
+	migrate.SetIgnoreUnknown(false)
 	cli := &cli.CLI{
 		Args: os.Args[1:],
 		Commands: map[string]cli.CommandFactory{

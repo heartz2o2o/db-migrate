@@ -4,6 +4,8 @@ mysql migrate
 
 ## Getting Started
 
+Fork from [sql-migrate](https://github.com/rubenv/sql-migrate)
+
 ### Prerequisites
 
 1. Installed [golang](https://golang.org/doc/install)
