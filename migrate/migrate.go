@@ -127,7 +127,7 @@ type Migration struct {
 func (m Migration) Less(other *Migration) bool {
 	switch {
 	case m.isNumeric() && other.isNumeric() && m.VersionInt() != other.VersionInt():
-		return m.VersionInt() > other.VersionInt()
+		return m.VersionInt() < other.VersionInt()
 	case m.isNumeric() && !other.isNumeric():
 		return true
 	case !m.isNumeric() && other.isNumeric():
@@ -569,7 +569,7 @@ func (ms MigrationSet) PlanMigration(db *sql.DB, dialect string, m MigrationSour
 	// Add missing migrations up to the last run migration.
 	// This can happen for example when merges happened.
 	if len(existingMigrations) > 0 {
-		result = append(result, ToCatchup(migrations, existingMigrations, record)...)
+		result = append(result, ToCatchup(migrations, existingMigrations, record, ms.IgnoreUnknown)...)
 	}
 
 	// Figure out which migrations to apply
@@ -677,7 +677,7 @@ func ToApply(migrations []*Migration, current string, direction MigrationDirecti
 	panic("Not possible")
 }
 
-func ToCatchup(migrations, existingMigrations []*Migration, lastRun *Migration) []*PlannedMigration {
+func ToCatchup(migrations, existingMigrations []*Migration, lastRun *Migration, ignoreUnknown bool) []*PlannedMigration {
 	missing := make([]*PlannedMigration, 0)
 	for _, migration := range migrations {
 		found := false
@@ -688,6 +688,12 @@ func ToCatchup(migrations, existingMigrations []*Migration, lastRun *Migration) 
 			}
 		}
 		if !found && migration.Less(lastRun) {
+			missing = append(missing, &PlannedMigration{
+				Migration:          migration,
+				Queries:            migration.Up,
+				DisableTransaction: migration.DisableTransactionUp,
+			})
+		} else if !found && ignoreUnknown {
 			missing = append(missing, &PlannedMigration{
 				Migration:          migration,
 				Queries:            migration.Up,
