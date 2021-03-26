@@ -48,8 +48,9 @@ func (c *UpCommand) Run(args []string) int {
 
 	err := ApplyMigrations(migrate.Up, dryrun, limit)
 	if err != nil {
-		fmt.Print(err.Error())
-		return 1
+		panic(err.Error())
+		// fmt.Print(err.Error())
+		// return 1
 	}
 
 	return 0

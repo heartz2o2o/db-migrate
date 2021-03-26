@@ -48,8 +48,9 @@ func (c *DownCommand) Run(args []string) int {
 
 	err := ApplyMigrations(migrate.Down, dryrun, limit)
 	if err != nil {
-		fmt.Print(err.Error())
-		return 1
+		panic(err.Error())
+		// fmt.Print(err.Error())
+		// return 1
 	}
 
 	return 0
