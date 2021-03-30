@@ -579,14 +579,21 @@ func (ms MigrationSet) PlanMigration(db *sql.DB, dialect string, m MigrationSour
 		toApplyCount = max
 	}
 	for _, v := range toApply[0:toApplyCount] {
+		found := false
+		for _, catchup := range result {
+			if catchup.Id == v.Id {
+				found = true
+				break
+			}
+		}
 
-		if dir == Up {
+		if !found && dir == Up {
 			result = append(result, &PlannedMigration{
 				Migration:          v,
 				Queries:            v.Up,
 				DisableTransaction: v.DisableTransactionUp,
 			})
-		} else if dir == Down {
+		} else if !found && dir == Down {
 			result = append(result, &PlannedMigration{
 				Migration:          v,
 				Queries:            v.Down,

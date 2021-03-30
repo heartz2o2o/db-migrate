@@ -19,7 +19,10 @@ func main() {
 	// command.SetEnvironment(env)
 	// migrate.SetIgnoreUnknown(true)
 	// Upcommand := command.UpCommand{}
-	// Upcommand.Run([]string{})
+
+	// if err := Upcommand.RunProcess([]string{}); err != nil {
+	// 	panic(err.Error())
+	// }
 
 	realMain()
 	os.Exit(0)

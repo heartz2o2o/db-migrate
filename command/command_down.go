@@ -33,6 +33,15 @@ func (c *DownCommand) Synopsis() string {
 }
 
 func (c *DownCommand) Run(args []string) int {
+	if err := c.RunProcess(args); err != nil {
+		fmt.Print(err.Error())
+		return 1
+	}
+
+	return 0
+}
+
+func (c *DownCommand) RunProcess(args []string) (err error) {
 	var limit int
 	var dryrun bool
 
@@ -42,16 +51,14 @@ func (c *DownCommand) Run(args []string) int {
 	cmdFlags.BoolVar(&dryrun, "dryrun", false, "Don't apply migrations, just print them.")
 	ConfigFlags(cmdFlags)
 
-	if err := cmdFlags.Parse(args); err != nil {
-		return 1
+	if err = cmdFlags.Parse(args); err != nil {
+		return
 	}
 
-	err := ApplyMigrations(migrate.Down, dryrun, limit)
+	err = ApplyMigrations(migrate.Down, dryrun, limit)
 	if err != nil {
-		panic(err.Error())
-		// fmt.Print(err.Error())
-		// return 1
+		return
 	}
 
-	return 0
+	return
 }

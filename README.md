@@ -29,8 +29,12 @@ func main() {
 		DataSource: "root:123456@tcp(localhost:3306)/bac?parseTime=true",
 		Dir:        "./sql"}
 	command.SetEnvironment(env)
-	migrate := command.UpCommand{}
-	migrate.Run([]string{})
+	migrate.SetIgnoreUnknown(true)
+	Upcommand := command.UpCommand{}
+
+	if err := Upcommand.RunProcess([]string{}); err != nil {
+		panic(err.Error())
+	}
 }
 
 ```
