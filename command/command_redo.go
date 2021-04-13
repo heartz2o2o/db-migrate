@@ -45,13 +45,13 @@ func (c *RedoCommand) Run(args []string) int {
 
 	env, err := GetEnvironment()
 	if err != nil {
-		fmt.Printf("Could not parse config: %s", err)
+		fmt.Printf("Could not parse config: %s\n", err)
 		return 1
 	}
 
 	db, dialect, err := GetConnection(env)
 	if err != nil {
-		fmt.Print(err.Error())
+		fmt.Println(err.Error())
 		return 1
 	}
 
@@ -61,10 +61,10 @@ func (c *RedoCommand) Run(args []string) int {
 
 	migrations, _, err := migrate.PlanMigration(db, dialect, source, migrate.Down, 1)
 	if err != nil {
-		fmt.Printf("Migration (redo) failed: %v", err)
+		fmt.Printf("Migration (redo) failed: %v\n", err)
 		return 1
 	} else if len(migrations) == 0 {
-		fmt.Print("Nothing to do!")
+		fmt.Println("Nothing to do!")
 		return 0
 	}
 
@@ -74,17 +74,17 @@ func (c *RedoCommand) Run(args []string) int {
 	} else {
 		_, err := migrate.ExecMax(db, dialect, source, migrate.Down, 1)
 		if err != nil {
-			fmt.Printf("Migration (down) failed: %s", err)
+			fmt.Printf("Migration (down) failed: %s\n", err)
 			return 1
 		}
 
 		_, err = migrate.ExecMax(db, dialect, source, migrate.Up, 1)
 		if err != nil {
-			fmt.Printf("Migration (up) failed: %s", err)
+			fmt.Printf("Migration (up) failed: %s\n", err)
 			return 1
 		}
 
-		fmt.Printf("Reapplied migration %s.", migrations[0].Id)
+		fmt.Printf("Reapplied migration %s\n", migrations[0].Id)
 	}
 
 	return 0

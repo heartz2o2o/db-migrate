@@ -51,9 +51,9 @@ func ApplyMigrations(dir migrate.MigrationDirection, dryrun bool, limit int) err
 		}
 
 		if n == 1 {
-			fmt.Print("Applied 1 migration")
+			fmt.Print("Applied 1 migration\n")
 		} else {
-			fmt.Printf("Applied %d migrations", n)
+			fmt.Printf("Applied %d migrations\n", n)
 		}
 	}
 
@@ -62,12 +62,12 @@ func ApplyMigrations(dir migrate.MigrationDirection, dryrun bool, limit int) err
 
 func PrintMigration(m *migrate.PlannedMigration, dir migrate.MigrationDirection) {
 	if dir == migrate.Up {
-		fmt.Printf("==> Would apply migration %s (up)", m.Id)
+		fmt.Printf("==> Would apply migration %s (up)\n", m.Id)
 		for _, q := range m.Up {
 			fmt.Print(q)
 		}
 	} else if dir == migrate.Down {
-		fmt.Printf("==> Would apply migration %s (down)", m.Id)
+		fmt.Printf("==> Would apply migration %s (down)\n", m.Id)
 		for _, q := range m.Down {
 			fmt.Print(q)
 		}

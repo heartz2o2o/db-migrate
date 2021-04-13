@@ -44,13 +44,13 @@ func (c *StatusCommand) Run(args []string) int {
 
 	env, err := GetEnvironment()
 	if err != nil {
-		fmt.Printf("Could not parse config: %s", err)
+		fmt.Printf("Could not parse config: %s\n", err)
 		return 1
 	}
 
 	db, dialect, err := GetConnection(env)
 	if err != nil {
-		fmt.Print(err.Error())
+		fmt.Println(err.Error())
 		return 1
 	}
 
@@ -59,13 +59,13 @@ func (c *StatusCommand) Run(args []string) int {
 	}
 	migrations, err := source.FindMigrations()
 	if err != nil {
-		fmt.Print(err.Error())
+		fmt.Println(err.Error())
 		return 1
 	}
 
 	records, err := migrate.GetMigrationRecords(db, dialect)
 	if err != nil {
-		fmt.Print(err.Error())
+		fmt.Println(err.Error())
 		return 1
 	}
 
@@ -84,7 +84,7 @@ func (c *StatusCommand) Run(args []string) int {
 
 	for _, r := range records {
 		if rows[r.Id] == nil {
-			fmt.Printf("Could not find migration file: %v", r.Id)
+			fmt.Printf("Could not find migration file: %v\n", r.Id)
 			continue
 		}
 

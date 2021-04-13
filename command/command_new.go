@@ -51,7 +51,7 @@ func (c *NewCommand) Run(args []string) int {
 
 	if len(args) < 1 {
 		err := errors.New("A name for the migration is needed")
-		fmt.Print(err.Error())
+		fmt.Println(err.Error())
 		return 1
 	}
 
@@ -60,7 +60,7 @@ func (c *NewCommand) Run(args []string) int {
 	}
 
 	if err := CreateMigration(cmdFlags.Arg(0)); err != nil {
-		fmt.Print(err.Error())
+		fmt.Println(err.Error())
 		return 1
 	}
 	return 0
@@ -89,6 +89,6 @@ func CreateMigration(name string) error {
 		return err
 	}
 
-	fmt.Printf("Created migration %s", pathName)
+	fmt.Printf("Created migration %s\n", pathName)
 	return nil
 }

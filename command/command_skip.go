@@ -46,7 +46,7 @@ func (c *SkipCommand) Run(args []string) int {
 
 	err := SkipMigrations(migrate.Up, dryrun, limit)
 	if err != nil {
-		fmt.Print(err.Error())
+		fmt.Println(err.Error())
 		return 1
 	}
 
@@ -75,11 +75,11 @@ func SkipMigrations(dir migrate.MigrationDirection, dryrun bool, limit int) erro
 
 	switch n {
 	case 0:
-		fmt.Print("All migrations have already been applied")
+		fmt.Println("All migrations have already been applied")
 	case 1:
-		fmt.Print("Skipped 1 migration")
+		fmt.Println("Skipped 1 migration")
 	default:
-		fmt.Printf("Skipped %d migrations", n)
+		fmt.Printf("Skipped %d migrations\n", n)
 	}
 
 	return nil
