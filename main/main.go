@@ -5,7 +5,6 @@ import (
 	"os"
 
 	command "github.com/heartz2o2o/db-migrate/command"
-	migrate "github.com/heartz2o2o/db-migrate/migrate"
 	"github.com/mitchellh/cli"
 )
 
@@ -14,10 +13,10 @@ var ui cli.Ui
 func main() {
 	// env := &command.Environment{
 	// 	Dialect:    "mysql",
-	// 	DataSource: "root:123456@tcp(localhost:3306)/member?parseTime=true",
-	// 	Dir:        "../sql"}
+	// 	DataSource: "root:123456@tcp(localhost:3306)/bac?parseTime=true",
+	// 	Dir:        "./sql"}
 	// command.SetEnvironment(env)
-	// migrate.SetIgnoreUnknown(true)
+	// command.SetIgnoreUnknown(true)
 	// Upcommand := command.UpCommand{}
 
 	// if err := Upcommand.RunProcess([]string{}); err != nil {
@@ -29,7 +28,7 @@ func main() {
 }
 
 func realMain() int {
-	migrate.SetIgnoreUnknown(false)
+	command.SetIgnoreUnknown(false)
 	cli := &cli.CLI{
 		Args: os.Args[1:],
 		Commands: map[string]cli.CommandFactory{

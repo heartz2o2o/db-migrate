@@ -60,6 +60,7 @@ func SkipMigrations(dir migrate.MigrationDirection, dryrun bool, limit int) erro
 	}
 
 	db, dialect, err := GetConnection(env)
+	defer db.Close()
 	if err != nil {
 		return err
 	}

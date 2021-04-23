@@ -50,6 +50,7 @@ func (c *RedoCommand) Run(args []string) int {
 	}
 
 	db, dialect, err := GetConnection(env)
+	defer db.Close()
 	if err != nil {
 		fmt.Println(err.Error())
 		return 1

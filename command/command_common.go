@@ -12,6 +12,10 @@ func SetEnvironment(env *Environment) {
 	SetEnv = env
 }
 
+func SetIgnoreUnknown(v bool) {
+	migrate.SetIgnoreUnknown(v)
+}
+
 func ApplyMigrations(dir migrate.MigrationDirection, dryrun bool, limit int) error {
 	var env *Environment
 	yamlEnv, err := GetEnvironment()
@@ -27,6 +31,7 @@ func ApplyMigrations(dir migrate.MigrationDirection, dryrun bool, limit int) err
 	}
 
 	db, dialect, err := GetConnection(env)
+	defer db.Close()
 	if err != nil {
 		return err
 	}
